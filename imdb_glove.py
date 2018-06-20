@@ -5,7 +5,6 @@ from keras.preprocessing import sequence
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Embedding, LSTM, Bidirectional
 import os
-
 max_features = 20000
 max_len = 100
 batch_size = 32
@@ -62,7 +61,7 @@ f.close()
 
 print(('Total %s word vectors.' % len(embeddings_index)))
 
-embedding_matrix = np.random.random((len(word_index) + 1, EMBEDDING_DIM))
+embedding_matrix = np.zeros((len(word_index)+1, 300))
 for word, i in list(word_index.items()):
     embedding_vector = embeddings_index.get(word)
     if embedding_vector is not None:
@@ -72,7 +71,7 @@ for word, i in list(word_index.items()):
 
 # 创建网络结构
 model = Sequential()
-model.add(Embedding(max_features, 300, input_length=max_len))
+model.add(Embedding(max_features, 300, input_length=max_len,weights=[embedding_matrix]))
 model.add(Bidirectional(LSTM(64)))
 model.add(Dropout(0.5))
 model.add(Dense(2, activation='sigmoid'))
