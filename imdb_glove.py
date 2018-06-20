@@ -4,6 +4,7 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Embedding, LSTM, Bidirectional
+import os
 
 max_features = 20000
 max_len = 100
