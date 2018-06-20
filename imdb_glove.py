@@ -71,7 +71,7 @@ for word, i in list(word_index.items()):
 
 # 创建网络结构
 model = Sequential()
-model.add(Embedding(max_features, 300, input_length=max_len,weights=[embedding_matrix]))
+model.add(Embedding(len(word_index)+1, 300, input_length=max_len,weights=[embedding_matrix]))
 model.add(Bidirectional(LSTM(64)))
 model.add(Dropout(0.5))
 model.add(Dense(2, activation='sigmoid'))
